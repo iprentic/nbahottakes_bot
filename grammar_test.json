@@ -1,0 +1,67 @@
+{
+  "origin": ["#sentences#"],
+  "sentences": [
+                "The #team# will #transitive_verb# the #team# in #playoff_games# #hashtags#"
+
+               ],
+  
+  "player": ["Melo", "Kyrie Irving", "DeMarcus Cousins", "Kristaps Porzingis", "Isaiah Thomas", "Jimmy Butler", "Lonzo Ball", "Paul George", "LaMarcus Aldridge", "Carmelo Anthony", "Kevin Love", "James Harden", "Chris Paul", "Anthony Davis", "Karl-Anthony Towns", "Russell Westbrook", "Steph Curry", "KD", "Kevin Durant", "Klay Thompson", "Draymond Green", "Kawhi Leonard", "LeBron James", "DeMar DeRozan", "Kyle Lowry", "Blake Griffin", "Giannis", "Joel Embiid", "Damian Lillard", "Ben Simmons", "Donovan Mitchell"],
+  "injured_player": ["Kyrie Irving", "DeMarcus Cousins", "Kristaps Porzingis", "Isaiah Thomas", "Steph Curry", "Kawhi Leonard"],
+  "coach": ["Steve Kerr", "Gregg Popovich", "Ty Lue", "Dwane Casey", "Mike D'Antoni"],
+  "arena": ["TD Garden", "Barclays Center", "Madison Square Garden", "Wells Fargo Center", "Air Canada Centre", "United Center", "Quicken Loans Arena", "The Palace of Auburn Hills", "Bankers Life Fieldhouse", "BMO Harris Bradley Center", "Philips Arena", "Spectrum Center", "American Airlines Arena", "Amway Center", "Verizon Center", "Pepsi Center", "Target Center", "Chesapeake Energy Arena", "Moda Center", "Vivint Smart Home Arena", "Oracle Arena", "Staples Center", "Staples Center", "Talking Stick Resort Arena", "Golden 1 Center", "American Airlines Center", "Toyota Center", "FedExForum", "Smoothie King Center", "AT&T Center"],
+  "team": ["Boston Celtics", "Brooklyn Nets", "New York Knicks", "Philadelphia 76ers", "Toronto Raptors", "Chicago Bulls", "Cleveland Cavaliers", "Detroit Pistons", "Indiana Pacers", "Milwaukee Bucks", "Atlanta Hawks", "Charlotte Hornets", "Miami Heat", "Orlando Magic", "Washington Wizards", "Denver Nuggets", "Minnesota Timberwolves", "Oklahoma City Thunder", "Portland Trail Blazers", "Utah Jazz", "Golden State Warriors", "Los Angeles Clippers", "Los Angeles Lakers", "Phoenix Suns", "Sacramento Kings", "Dallas Mavericks", "Houston Rockets", "Memphis Grizzlies", "New Orleans Pelicans", "San Antonio Spurs"],
+  "position": ["point guard", "shooting guard", "small forward", "power forward", "center", "defender", "scorer", "player", "coach", "assistant coach", "GM", "owner", "teammate"],
+  "group": ["eastern conference", "western conference", "league", "division", "NBA"], 
+  "playoffs": ["first round", "second round", "conference finals", "playoffs", "finals"],
+  "playoff_games": ["the #playoffs#", "#number_of_games# games"],
+  "role": ["MVP", "a champion", "conference champion", "on the cover of 2k", "an all star"],
+  "hashtags": ["#PhilaUnite", "#WhiteHot", 
+               "#DubNation", "#GoSpursGo", 
+               "#TakeNote", "#ThunderUp", 
+               "#Rockets", "#AllEyesNorth",
+               "#Pacers", "#AllForOne",
+               "#CUsRise", "#FearTheDear",
+               "#RipCity", "#DoItBigger",
+               "#WeTheNorth", "#DCFamily"],
+  
+  "interjection": ["wow", "ooh", "oh", "my word", "mmm", "gosh", "ah", "indubitably", "damn", "omg", "my my", "holy"],
+  
+  "number_of_games": ["four", "five", "six", "seven"],
+  
+  "art_verb": ["evokes", "comments on", "contrasts with", "challenges", "probes" ],
+  "transitive_verb": ["destroy", "be more like", "love", "challenge", "bounce"],
+  "intransitive_verb": ["choke", "dominate", "destroy", "transform"],
+  "player_or_team_verb": ["shoot threes", "make shots", "play defense", "make free throws", "get a shot off", "draw fouls", "block shots"],
+  
+  "comparative_adj": ["overrated", "underrated", "appreciated", "overpaid", "underpaid", "undervalued"],
+  "adjs":
+    [ "unbeatable",
+      "unstoppable",
+      "amazing",
+      "absorbing",
+      "admired",
+      "awesome",
+      "bangin",
+      "bolstered",
+      "bungling",
+      "chivalrous",
+      "cleansed",
+      "clutch",
+      "dazzling",
+      "decrepit",
+      "effective",
+      "enchanting",
+      "experienced",
+      "explosive",
+      "extraordinary",
+      "exuberant",
+      "incredible",
+      "glorious",
+      "long",
+      "ridiculous",
+      "soft",
+      "strong",
+      "subpar",
+      "unbelievable",
+      "a contender"]
+}
