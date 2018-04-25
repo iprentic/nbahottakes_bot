@@ -1,14 +1,14 @@
 {
   "origin": ["#sentences#"],
   "sentences": ["#interjection#, #player# is really #adjs#",
-                "#player# is basically the #player# of the #team#",
+                "#player# is #adverb# #player_comparison#",
+                "#player# is a poor man's #player#",                
                 "The #team# would be #adjs# if they had #player#",
                 "The #team# would #transitive_verb# the #team# if they had #player#",
                 "The #team# would be #adjs# if they could #player_or_team_verb#",
                 "#player# could be #role# if he could #player_or_team_verb#",
                 "The #team# should trade #player# for #player#",
                 "#player# and a 2nd round pick for #player#, who says no?",
-                "#player# is a poor man's #player#",
                 "The #team# will be #adjs# when #injured_player# comes back",
                 "The #team# are going to #intransitive_verb# in the #playoffs#",
                 "The #team# will #transitive_verb# the #team# in #playoff_games#",
@@ -30,10 +30,12 @@
   "playoff_games": ["the #playoffs#", "#number_of_games# games"],
   "role": ["MVP", "a champion", "conference champion", "on the cover of 2k", "an all star"],
   "skill": ["a jump shot", "6 inches of height", "6 inches of wingspan", "a 3 point shot", "a good FT%", "a post move", "a hook shot"],
-  "being": ["#player# part 2", "the best #position# in the #group#"],
+  "player_comparison": ["the #player# of the #team#", "#adjs.a# #player#"],
+  "being": ["#player# part 2", "the best #position# in the #group#", "#player_comparison#"],
   "player_in_arena": ["can #always_or_never# #player_or_team_verb#", "always #intransitive_verb#s", "is always so #adjs#"],
   
   "interjection": ["wow", "ooh", "oh man", "snap", "my word", "mmm", "gosh", "ah", "indubitably", "damn", "omg", "my my", "holy"],
+  "adverb": ["basically", "literally", "seriously like"],
   
   "number_of_games": ["four", "five", "six", "seven"],
   "always_or_never": ["always", "never"],
@@ -45,12 +47,13 @@
   
   "comparative_adj": ["overrated", "underrated", "appreciated", "overpaid", "underpaid", "undervalued"],
   "adjs":
-    [ "unbeatable",
-      "unstoppable",
+    [
+      "a contender",
       "amazing",
       "absorbing",
       "admired",
       "aggressive",
+      "athletic",
       "awesome",
       "bangin",
       "bolstered",
@@ -71,9 +74,11 @@
       "long",
       "physical",
       "ridiculous",
+      "scrappy",
       "soft",
       "strong",
       "subpar",
+      "unbeatable",
       "unbelievable",
-      "a contender"]
+      "unstoppable"]
 }

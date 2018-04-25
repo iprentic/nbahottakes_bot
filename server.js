@@ -75,8 +75,11 @@ function addHashtag(tweet) {
       }
     }
   if (!containsTeam(tweet)) {
-    const allHashtags = Object.keys(hashtags);
-    toReturn += " " + hashtags[allHashtags[Math.floor(Math.random()*allHashtags.length)]];
+    const randomHashtagProbability = 0.5;
+    if (Math.random() < randomHashtagProbability) {
+      const allHashtags = Object.keys(hashtags);
+      toReturn += " " + hashtags[allHashtags[Math.floor(Math.random()*allHashtags.length)]];
+    }
   }
   return toReturn;
 }
