@@ -65,37 +65,6 @@ app.all("/" + process.env.INSTA_CALLBACK_ENDPOINT, function(req, res) {
   res.sendStatus(200);
 });
 
-const teamAccounts = {"Boston Celtics": 'celtics', 
-                      "Brooklyn Nets": 'BrooklynNets', 
-                      "New York Knicks": 'nyknicks', 
-                      "Philadelphia 76ers": 'sixers', 
-                      "Toronto Raptors": 'raptors', 
-                      "Chicago Bulls": 'chicagobulls', 
-                      "Cleveland Cavaliers": 'cavs', 
-                      "Detroit Pistons": 'DetroitPistons', 
-                      "Indiana Pacers": 'Pacers', 
-                      "Milwaukee Bucks": 'Bucks', 
-                      "Atlanta Hawks": 'ATLHawks', 
-                      "Charlotte Hornets": 'hornets', 
-                      "Miami Heat": 'MiamiHEAT', 
-                      "Orlando Magic": 'OrlandoMagic', 
-                      "Washington Wizards": 'WashWizards', 
-                      "Denver Nuggets": 'nuggets', 
-                      "Minnesota Timberwolves": 'Timberwolves', 
-                      "Oklahoma City Thunder": 'okcthunder', 
-                      "Portland Trail Blazers": 'trailblazers', 
-                      "Utah Jazz": 'utahjazz', 
-                      "Golden State Warriors": 'warriors', 
-                      "Los Angeles Clippers": 'LAClippers', 
-                      "Los Angeles Lakers": 'Lakers', 
-                      "Phoenix Suns": 'Suns', 
-                      "Sacramento Kings": 'SacramentoKings', 
-                      "Dallas Mavericks": 'dallasmavs', 
-                      "Houston Rockets": 'HoustonRockets', 
-                      "Memphis Grizzlies": 'memgrizz', 
-                      "New Orleans Pelicans": 'PelicansNBA', 
-                      "San Antonio Spurs": 'spurs'}
-
 const nicknames = {"Melo": 'Carmelo Anthony', 
                    "Playoff Rondo": 'Rajon Rondo', 
                    "Giannis": 'Giannis Antetokounmpo'
@@ -295,40 +264,6 @@ function tweet() {
   }
 }
 
-//tweet();
-
-
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your bot is running on port ' + listener.address().port);
 });
-
-const isInLast24HoursIsh = function(createdAt) {
-  // This also makes the assumption that the team has tweeted in the past month
-  // Which hopefully they did... otherwise that's kinda sad lol
-  // And it might be funny to retweet an old tweet anyway so whatever
-  // example input: Sun Apr 29 04:59:34 +0000 2018
-  // This will not work on the first day of the month but whatever :)
-  const dateParts = createdAt.split(" ");
-  const day = dateParts[2];
-  const time = dateParts[3];
-  const timeParts = time.split(':');
-  const hour = timeParts[0];
-  
-  const today = new Date();
-  const todaysDay = today.getDate();
-  const todaysHour = today.getHours();
-  
-  return day == todaysDay || (day == todaysDay - 1 && hour >= todaysHour);
-}
-
-const getTweets = function(team_handle) {
-  return T.get('statuses/user_timeline', { screen_name: team_handle, count: '5' }).then(function (response) {
-    const data = response.data;
-    const lastTweet = data[data.length - 1];
-    if(isInLast24HoursIsh(lastTweet['created_at'])) {
-      return (data[Math.floor(Math.random() * data.length)]['id']);
-    }
-    return null;
-  })
-};
-
