@@ -22,6 +22,7 @@ var path = require('path'),
 
 app.use(express.static('public'));
 
+
 /* You can use uptimerobot.com or a similar site to hit your /BOT_ENDPOINT to wake up your app and make your Twitter bot tweet. */
 
 app.all("/" + process.env.BOT_ENDPOINT, function (req, res) {
@@ -29,14 +30,11 @@ app.all("/" + process.env.BOT_ENDPOINT, function (req, res) {
   const tweetText = generateHotTake(grammar);
   const players = JSON.parse(grammar.toJSON())['player'];
   const playersInTweet = wordsInText(players, tweetText);
-  const gifProbability = .5;
+  const gifProbability = .75;
   console.log(tweetText);
   if (playersInTweet.length > 0 && Math.random() < gifProbability) {
     // add a gif of the first player mentioned in the tweet
-    var player = playersInTweet[playersInTweet.length - 1];
-    if (player in nicknames) {
-      player = nicknames[player];
-    }
+    const player = getFirstPlayerInTweet(tweetText, playersInTweet);
     getRandomGif(player).then(function(gifURLAndDesc) { 
       const gifURL = gifURLAndDesc['url'];
       const gifDescription = gifURLAndDesc['desc'];
@@ -83,22 +81,24 @@ function wordsInText(words, tweet) {
 function addHashtags(teams, tweet) {
   var toReturn = tweet;
   const teamsInTweet = wordsInText(teams, tweet);
-    const hashtags = {"Philadelphia 76ers": "#PhilaUnite", 
-                     "Miami Heat": "#WhiteHot", 
-                     "Golden State Warriors": "#DubNation", 
-                     "San Antonio Spurs": "#GoSpursGo", 
-                     "Utah Jazz": "#TakeNote", 
-                     "Oklahoma City Thunder": "#ThunderUp", 
-                     "Houston Rockets": "#Rockets", 
-                     "Minnesota Timberwolves": "#AllEyesNorth",
-                     "Indiana Pacers": "#Pacers", 
+    const hashtags = {"76ers": "#PhilaUnite", 
+                     "Heat": "#WhiteHot", 
+                     "Warriors": "#DubNation", 
+                     "Spurs": "#GoSpursGo", 
+                     "Jazz": "#TakeNote", 
+                     "Thunder": "#ThunderUp", 
+                     "Rockets": "#Rockets", 
+                     "Timberwolves": "#AllEyesNorth",
+                     "Pacers": "#Pacers", 
                      "Cleveland Cavaliers": "#AllForOne",
-                     "Boston Celtics": "#CUsRise", 
-                     "Milwaukee Bucks": "#FearTheDear",
-                     "Portland Trail Blazers": "#RipCity", 
-                     "New Orleans Pelicans": "#DoItBigger",
-                     "Toronto Raptors": "#WeTheNorth", 
-                     "Washington Wizards": "#DCFamily"};
+                     "Celtics": "#CUsRise", 
+                     "Bucks": "#FearTheDear",
+                     "Blazers": "#RipCity", 
+                     "Pelicans": "#DoItBigger",
+                     "Raptors": "#WeTheNorth", 
+                     "Wizards": "#DCFamily",
+                     "Dubs": "#DubNation",
+                     "Cavs": "#AllForOne"};
     for (let team of teamsInTweet) {
       if (team in hashtags) {
         toReturn += " " + hashtags[team];
@@ -128,10 +128,11 @@ function generateHotTake(grammar) {
   return hotTake;
 }
 
-const fileName = 'player.gif';
+const fileName = '/tmp/player.gif';
 
 function uploadGifAndPostTweet(tweetText, gifAltText, originalRequest) {
-  var mediaFilePath = path.join(__dirname, './' + fileName);
+  // var mediaFilePath = path.join(__dirname, './' + fileName);
+  var mediaFilePath = fileName;
   var mediaType = mime.lookup(mediaFilePath);
   var mediaFileSizeBytes = fs.statSync(mediaFilePath).size;
   const callPostTweet = function(err, data, response) {
@@ -188,6 +189,22 @@ function uploadGifAndPostTweet(tweetText, gifAltText, originalRequest) {
     });
 }
 
+
+const getFirstPlayerInTweet = function(tweet, playersInTweet) {
+  var firstPlayer = playersInTweet[0];
+  var firstLocation = tweet.indexOf(firstPlayer);
+  for (let player of playersInTweet) {
+    if (tweet.indexOf(player) < firstLocation) {
+      firstLocation = tweet.indexOf(player);
+      firstPlayer = player;
+    }
+  }
+  if (firstPlayer in nicknames) {
+    return nicknames[firstPlayer];
+  }
+  return firstPlayer;
+}
+
 const postTweet = function (tweetText, gifAltText, originalRequest, err, data, response) {
       // now we can assign alt text to the media, for use by screen readers and
       // other text-based presentations and interpreters
@@ -204,7 +221,6 @@ const postTweet = function (tweetText, gifAltText, originalRequest, err, data, r
               var params = { status: tweetText, media_ids: [mediaIdStr] };
 
               T.post('statuses/update', params, function (err, data, response) {
-                console.log(originalRequest);
                 if (err){
                   console.log('error!', err);
                   if (originalRequest) {
