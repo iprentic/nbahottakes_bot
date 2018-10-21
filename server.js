@@ -1,16 +1,16 @@
 /* Setting things up. */
 var path = require('path'),
     express = require('express'),
-    app = express(),   
+    app = express(),
     Twit = require('twit'),
-    tracery = require('tracery-grammar'), 
+    tracery = require('tracery-grammar'),
     request = require('request-promise-native'),
     requests = require('request'),
     assert = require('assert'),
     mime = require('mime'),
     fs = require('fs'),
     config = {
-    /* Be sure to update the .env file with your API keys. See how to get them: https://botwiki.org/tutorials/how-to-create-a-twitter-app */      
+    /* Be sure to update the .env file with your API keys. See how to get them: https://botwiki.org/tutorials/how-to-create-a-twitter-app */
       twitter: {
         consumer_key: process.env.CONSUMER_KEY,
         consumer_secret: process.env.CONSUMER_SECRET,
@@ -35,7 +35,7 @@ app.all("/" + process.env.BOT_ENDPOINT, function (req, res) {
   if (playersInTweet.length > 0 && Math.random() < gifProbability) {
     // add a gif of the first player mentioned in the tweet
     const player = getFirstPlayerInTweet(tweetText, playersInTweet);
-    getRandomGif(player).then(function(gifURLAndDesc) { 
+    getRandomGif(player).then(function(gifURLAndDesc) {
       const gifURL = gifURLAndDesc['url'];
       const gifDescription = gifURLAndDesc['desc'];
       requests.head(gifURL, function(err, res2, body){
@@ -63,8 +63,8 @@ app.all("/" + process.env.INSTA_CALLBACK_ENDPOINT, function(req, res) {
   res.sendStatus(200);
 });
 
-const nicknames = {"Melo": 'Carmelo Anthony', 
-                   "Playoff Rondo": 'Rajon Rondo', 
+const nicknames = {"Melo": 'Carmelo Anthony',
+                   "Playoff Rondo": 'Rajon Rondo',
                    "Giannis": 'Giannis Antetokounmpo'
                   }
 
@@ -81,27 +81,46 @@ function wordsInText(words, tweet) {
 function addHashtags(teams, tweet) {
   var toReturn = tweet;
   const teamsInTweet = wordsInText(teams, tweet);
-    const hashtags = {"76ers": "#PhilaUnite", 
-                     "Heat": "#WhiteHot", 
-                     "Warriors": "#DubNation", 
-                     "Spurs": "#GoSpursGo", 
-                     "Jazz": "#TakeNote", 
-                     "Thunder": "#ThunderUp", 
-                     "Rockets": "#Rockets", 
+    const hashtags = {"76ers": "#HereTheyCome",
+                     "Heat": "#WhiteHot",
+                     "Warriors": "#DubNation",
+                     "Spurs": "#GoSpursGo",
+                     "Jazz": "#TeamIsEverything",
+                     "Thunder": "#ThunderUp",
+                     "Rockets": "#Rockets",
                      "Timberwolves": "#AllEyesNorth",
-                     "Pacers": "#Pacers", 
-                     "Cleveland Cavaliers": "#AllForOne",
-                     "Celtics": "#CUsRise", 
+                     "Pacers": "#Pacers",
+                     "Cleveland Cavaliers": "#BeTheFight",
+                     "Celtics": "#CUsRise",
                      "Bucks": "#FearTheDear",
-                     "Blazers": "#RipCity", 
-                     "Pelicans": "#DoItBigger",
-                     "Raptors": "#WeTheNorth", 
+                     "Blazers": "#RipCity",
+                     "Pelicans": "#DoItBig",
+                     "Raptors": "#WeTheNorth",
                      "Wizards": "#DCFamily",
                      "Dubs": "#DubNation",
-                     "Cavs": "#AllForOne"};
+                     "Cavs": "#BeTheFight",
+                     "Hawks": "#TrueToAtlanta",
+                     "Nets": "#WeGoHard",
+                     "Hornets": "#Hornets30",
+                     "Bulls": "#BullsNation",
+                     "Mavericks": "#MFFL",
+                     "Nuggets": "#MileHighBasketball",
+                     "Pistons": "#DetroitBasketball",
+                     "Clippers": "#ClipperNation",
+                     "Lakers": "#LakeShow",
+                     "Grizzlies": "#GrindCity",
+                     "Heat": "#HEATCulture",
+                     "Knicks": "#NewYorkForever",
+                     "Magic": "#PureMagic",
+                     "Suns": "#TimeToRise",
+                     "Kings": "#SacramentoProud",
+                     "NBA": "#NBA",
+                     "NBA Twitter": "#NBATwitter"
+                     };
     for (let team of teamsInTweet) {
-      if (team in hashtags) {
-        toReturn += " " + hashtags[team];
+      const teamName = team.split(" ")[team.split(" ").length - 1];
+      if (teamName in hashtags) {
+        toReturn += " " + hashtags[teamName];
       }
     }
   if (teamsInTweet.length == 0) {
@@ -118,7 +137,7 @@ function getGrammar() {
   const grammarFile = require('./grammar.json');
   const grammar = tracery.createGrammar(grammarFile);
 
-  grammar.addModifiers(tracery.baseEngModifiers); 
+  grammar.addModifiers(tracery.baseEngModifiers);
   return grammar;
 }
 
@@ -138,7 +157,7 @@ function uploadGifAndPostTweet(tweetText, gifAltText, originalRequest) {
   const callPostTweet = function(err, data, response) {
     return postTweet(tweetText, gifAltText, originalRequest, err, data, response);
   }
-  
+
     T.post('media/upload', {
       'command': 'INIT',
       'media_type': mediaType,
@@ -178,7 +197,7 @@ function uploadGifAndPostTweet(tweetText, gifAltText, originalRequest) {
           isUploading = false;
         });
       });
- 
+
       fStream.on('end', function () {
         isStreamingFile = false;
 
@@ -231,7 +250,7 @@ const postTweet = function (tweetText, gifAltText, originalRequest, err, data, r
                   if (originalRequest) {
                     originalRequest.sendStatus(200);
                   }
-                }              
+                }
               });
           }
         else {
@@ -242,7 +261,7 @@ const postTweet = function (tweetText, gifAltText, originalRequest, err, data, r
         }
       })
     }
-  }   
+  }
 
 const getRandomGif = function(searchTerm) {
   const searchURL = 'https://api.giphy.com/v1/gifs/search?api_key=' + process.env.GIPHY_API_KEY + '&q='+ searchTerm + '&offset=0&rating=G&lang=en'
@@ -266,7 +285,7 @@ function tweet() {
     if (player in nicknames) {
       player = nicknames[player];
     }
-    getRandomGif(player).then(function(gifURLAndDesc) { 
+    getRandomGif(player).then(function(gifURLAndDesc) {
       const gifURL = gifURLAndDesc['url'];
       const gifDescription = gifURLAndDesc['desc'];
       requests.head(gifURL, function(err, res, body){
@@ -274,7 +293,7 @@ function tweet() {
     }); } );
   } else {
     T.post('statuses/update', { status: tweetText }, function (err, data, response) {
-        console.log(data); 
+        console.log(data);
       return err;
     });
   }
@@ -283,3 +302,4 @@ function tweet() {
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your bot is running on port ' + listener.address().port);
 });
+
