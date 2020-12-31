@@ -24,7 +24,7 @@
     "#short_team# in #number_of_games#",
     "The #team# need to #player_or_team_verb# to #beat# the #team# in the #playoffs#",
     "The #team# would #subjunctive_team# in the #playoffs# if they #team_condition#",
-    "#inspiring_phrase# #nice_adj# than a #player# #action"
+    "#inspiring_phrase# #nice_adj# than a #player# #action#"
   ],
   "player_can_be": [
     "a poor man's #player#",
