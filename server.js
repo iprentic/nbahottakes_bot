@@ -58,11 +58,6 @@ app.all("/" + process.env.SENTENCE_ENDPOINT, function (req, res) {
   res.send(generateHotTake(getGrammar()));
 });
 
-app.all("/" + process.env.INSTA_CALLBACK_ENDPOINT, function(req, res) {
-  console.log(req);
-  res.sendStatus(200);
-});
-
 const nicknames = {"Melo": 'Carmelo Anthony',
                    "Playoff Rondo": 'Rajon Rondo',
                    "Giannis": 'Giannis Antetokounmpo'
@@ -82,45 +77,47 @@ function addHashtags(teams, tweet) {
   var toReturn = tweet;
   const teamsInTweet = wordsInText(teams, tweet);
     const hashtags = {"76ers": "#HereTheyCome",
-                     "Heat": "#WhiteHot",
+                     "Sixers": "#HereTheyCome",
                      "Warriors": "#DubNation",
                      "Spurs": "#GoSpursGo",
-                     "Jazz": "#TeamIsEverything",
+                     "Jazz": "#TakeNote",
                      "Thunder": "#ThunderUp",
                      "Rockets": "#Rockets",
-                     "Timberwolves": "#AllEyesNorth",
-                     "Pacers": "#Pacers",
-                     "Cleveland Cavaliers": "#BeTheFight",
-                     "Celtics": "#CUsRise",
-                     "Bucks": "#FearTheDear",
+                     "Timberwolves": "#RaisedByWolves",
+                     "Pacers": "#AlwaysGame",
+                     "Cavaliers": "#BeTheFight",
+                     "Celtics": "#BleedGreen",
+                     "Bucks": "#FearTheDeer",
                      "Blazers": "#RipCity",
-                     "Pelicans": "#DoItBig",
+                     "Pelicans": "#WontBowDown",
                      "Raptors": "#WeTheNorth",
-                     "Wizards": "#DCFamily",
+                     "Wizards": "#DCAboveAll",
                      "Dubs": "#DubNation",
                      "Cavs": "#BeTheFight",
                      "Hawks": "#TrueToAtlanta",
-                     "Nets": "#WeGoHard",
-                     "Hornets": "#Hornets30",
+                     "Nets": "#BrooklynTogether",
+                     "Hornets": "#AllFly",
                      "Bulls": "#BullsNation",
                      "Mavericks": "#MFFL",
                      "Nuggets": "#MileHighBasketball",
-                     "Pistons": "#DetroitBasketball",
+                     "Pistons": "#DetroitUp",
                      "Clippers": "#ClipperNation",
                      "Lakers": "#LakeShow",
                      "Grizzlies": "#GrindCity",
-                     "Heat": "#HEATCulture",
+                     "Heat": "#HEATTwitter",
                      "Knicks": "#NewYorkForever",
-                     "Magic": "#PureMagic",
-                     "Suns": "#TimeToRise",
+                     "Magic": "#MagicTogether",
+                     "Suns": "#WeAreTheValley",
                      "Kings": "#SacramentoProud",
                      "NBA": "#NBA",
                      "NBA Twitter": "#NBATwitter"
                      };
+  var hashtagsAdded = new Set();
     for (let team of teamsInTweet) {
       const teamName = team.split(" ")[team.split(" ").length - 1];
-      if (teamName in hashtags) {
+      if (teamName in hashtags && !hashtagsAdded.has(hashtags[teamName])) {
         toReturn += " " + hashtags[teamName];
+        hashtagsAdded.add(hashtags[teamName]);
       }
     }
   if (teamsInTweet.length == 0) {
@@ -143,7 +140,10 @@ function getGrammar() {
 
 function generateHotTake(grammar) {
   const sentence = grammar.flatten('#origin#');
-  const hotTake = addHashtags(JSON.parse(grammar.toJSON())['team'], sentence);
+  const teams = JSON.parse(grammar.toJSON())['team'];
+  const short_teams = JSON.parse(grammar.toJSON())['short_team'];
+  const all_teams = teams.concat(short_teams);
+  const hotTake = addHashtags(all_teams, sentence);
   return hotTake;
 }
 
