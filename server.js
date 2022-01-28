@@ -139,30 +139,12 @@ function getGrammar() {
   return grammar;
 }
 
-function MYAllStars(sentence) {
-  const myAllStarVotes = ["Jaylen Brown",
-                          "Jayson Tatum",
-                          "DeMar DeRozan",
-                          "Kyle Lowry",
-                          "Steph Curry",
-                          "Klay Thompson",
-                          "Draymond Green",
-                          "Jordan Poole",
-                          "Andrew Wiggins",
-                          "Russell Westbrook",
-                          "Kevin Durant"];
-  return wordsInText(myAllStarVotes, sentence).length > 0;
-}
-
 function generateHotTake(grammar) {
   const sentence = grammar.flatten('#origin#');
   const teams = JSON.parse(grammar.toJSON())['team'];
   const short_teams = JSON.parse(grammar.toJSON())['short_team'];
   const all_teams = teams.concat(short_teams);
   let hotTake = addHashtags(all_teams, sentence);
-  if (MYAllStars(sentence)) {
-    hotTake += " #NBAAllStar"
-  }
   return hotTake;
 }
 
