@@ -84,33 +84,34 @@ function addHashtags(teams, tweet) {
                      "Thunder": "#ThunderUp",
                      "Rockets": "#Rockets",
                      "Timberwolves": "#RaisedByWolves",
-                     "Pacers": "#AlwaysGame",
+                     "Pacers": "#GoldBlooded",
                      "Cavaliers": "#BeTheFight",
                      "Celtics": "#BleedGreen",
                      "Bucks": "#FearTheDeer",
                      "Blazers": "#RipCity",
-                     "Pelicans": "#WontBowDown",
+                     "Pelicans": "#WBD",
                      "Raptors": "#WeTheNorth",
                      "Wizards": "#DCAboveAll",
                      "Dubs": "#DubNation",
                      "Cavs": "#BeTheFight",
                      "Hawks": "#TrueToAtlanta",
-                     "Nets": "#BrooklynTogether",
+                     "Nets": "#NetsWorld",
                      "Hornets": "#AllFly",
                      "Bulls": "#BullsNation",
                      "Mavericks": "#MFFL",
                      "Nuggets": "#MileHighBasketball",
-                     "Pistons": "#DetroitUp",
+                     "Pistons": "#Pistons",
                      "Clippers": "#ClipperNation",
                      "Lakers": "#LakeShow",
                      "Grizzlies": "#GrindCity",
-                     "Heat": "#HEATTwitter",
+                     "Heat": "#HEATCulture",
                      "Knicks": "#NewYorkForever",
                      "Magic": "#MagicTogether",
-                     "Suns": "#WeAreTheValley",
+                     "Suns": "#ValleyProud",
                      "Kings": "#SacramentoProud",
                      "NBA": "#NBA",
-                     "NBA Twitter": "#NBATwitter"
+                     "NBA Twitter": "#NBATwitter",
+                     "NBA All Star": "#NBAAllStar",
                      };
   var hashtagsAdded = new Set();
     for (let team of teamsInTweet) {
@@ -138,12 +139,30 @@ function getGrammar() {
   return grammar;
 }
 
+function MYAllStars(sentence) {
+  const myAllStarVotes = ["Jaylen Brown",
+                          "Jayson Tatum",
+                          "DeMar DeRozan",
+                          "Kyle Lowry",
+                          "Steph Curry",
+                          "Klay Thompson",
+                          "Draymond Green",
+                          "Jordan Poole",
+                          "Andrew Wiggins",
+                          "Russell Westbrook",
+                          "Kevin Durant"];
+  return wordsInText(myAllStarVotes, sentence).length > 0;
+}
+
 function generateHotTake(grammar) {
   const sentence = grammar.flatten('#origin#');
   const teams = JSON.parse(grammar.toJSON())['team'];
   const short_teams = JSON.parse(grammar.toJSON())['short_team'];
   const all_teams = teams.concat(short_teams);
-  const hotTake = addHashtags(all_teams, sentence);
+  let hotTake = addHashtags(all_teams, sentence);
+  if (MYAllStars(sentence)) {
+    hotTake += " #NBAAllStar"
+  }
   return hotTake;
 }
 
