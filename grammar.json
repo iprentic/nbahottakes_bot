@@ -13,8 +13,8 @@
     "#the_or_these_team# will need to #player_or_team_verb# to #beat# the #team# #future_condition#",
     "#player# #earning_award# #award# this season#lbj#",
     "#omg# #player# is #leaving_or_going_or_resigning# the #team#",
-    "#omg# #player# recruited #player# to the #team_or_nfl_team#",
-    "#omg# #player# is reuniting with #player# on the #team_or_nfl_team#",
+    "#omg# #player# recruited #player# to the #team_or_short_team#",
+    "#omg# #player# is reuniting with #player# on the #team_or_short_team#",
     "#omg# #player# is leaving #player_or_team# to join #player_on_team#",
     "#the_or_these_team# should #team_to_player_verb# #player# against the #team#",
     "#player# #player_in_condition# against #opponent#",
@@ -24,7 +24,15 @@
     "#short_team# in #number_of_games#",
     "The #team# need to #player_or_team_verb# to #beat# the #team# in the #playoffs#",
     "The #team# would #subjunctive_team# in the #playoffs# if they #team_condition#",
-    "#inspiring_phrase# #nice_adj# than a #player# #action#"
+    "#inspiring_phrase# #nice_adj# than a #player# #action#",
+    "The #team# should trade #player# and build around #player#",
+    "#player# always #player_against_team# against the #team_or_short_team#"
+  ],
+  "player_against_team": [
+    "goes off",
+    "turns into #player#",
+    "disappears",
+    "becomes #being#"
   ],
   "player_can_be": [
     "a poor man's #player#",
@@ -212,10 +220,9 @@
     "The",
     "I really hope that the"
   ],
-  "team_or_nfl_team": [
+  "team_or_short_team": [
     "#team#",
-    "#short_team#",
-    "#nfl_team#"
+    "#short_team#"
   ],
   "player_or_draft_pick": [
     "#player#"
@@ -267,25 +274,17 @@
     "Devin Booker",
     "Andrew Wiggins",
     "Kelly Oubre",
-    "James Wiseman"
-  ],
-  "2018_rookies": [
-    "Deandre Ayton",
-    "Marvin Bagley III",
-    "Luka Doncic",
-    "Mo Bamba",
-    "Trae Young",
-    "Devonte' Graham",
-    "Mikal Bridges",
-    "Miles Bridges"
-  ],
-  "2019_rookie": [
+    "James Wiseman",
     "Zion Williamson",
-    "Ja Morant",
-    "RJ Barrett",
     "Rui Hachimura",
-    "Cam Reddish",
-    "Jaxson Hayes"
+    "Ja Morant",
+    "Luka Doncic",
+    "Trae Young",
+    "Julius Randle",
+    "Nikola Vucevic",
+    "Domantas Sabonis",
+    "Bradley Beal",
+    "Jordan Poole"
   ],
   "coach": [
     "Steve Kerr",
@@ -514,7 +513,8 @@
     "first team all defense",
     "ROY",
     "first team all NBA",
-    "finals MVP"
+    "finals MVP",
+    "an all star"
   ],
   "beat": [
     "beat",
